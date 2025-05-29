@@ -22,7 +22,7 @@ body {
   position: absolute;
   width: 60px;
   height: 20px;
-  background: transparent;
+  background: rgba(0, 0, 255, 0.1);
   border: none;
   text-align: center;
   line-height: 20px;

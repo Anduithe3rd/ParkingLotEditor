@@ -8,26 +8,26 @@ function setView(view) {
   container.style.backgroundImage = `url('${map[view]}')`;
 }
 
-// Enable dragging for positioning
-document.addEventListener('DOMContentLoaded', () => {
-  const boxes = document.querySelectorAll('.car-box');
-  boxes.forEach(box => {
-    makeDraggable(box);
-  });
-});
-
-function makeDraggable(el) {
-  let isDragging = false;
-  let offsetX, offsetY;
-
-  el.addEventListener('mousedown', (e) => {
+  el.addEventListener('pointerdown', (e) => {
     isDragging = true;
     offsetX = e.offsetX;
     offsetY = e.offsetY;
+    el.setPointerCapture(e.pointerId);
     el.style.zIndex = 1000;
   });
 
-  document.addEventListener('mousemove', (e) => {
+  el.addEventListener('pointerup', (e) => {
+    if (isDragging) {
+      isDragging = false;
+      el.releasePointerCapture(e.pointerId);
+      el.style.zIndex = '';
+      console.log(
+        `<div class="car-box" contenteditable style="top: ${el.style.top}; left: ${el.style.left}; transform: ${el.style.transform};">${el.innerText}</div>`
+      );
+    }
+  });
+
+  el.addEventListener('pointermove', (e) => {
     if (isDragging) {
       const container = document.getElementById('lot-container');
       const rect = container.getBoundingClientRect();
@@ -37,14 +37,3 @@ function makeDraggable(el) {
       el.style.top = `${newTop}px`;
     }
   });
-
-  document.addEventListener('mouseup', () => {
-    if (isDragging) {
-      isDragging = false;
-      el.style.zIndex = '';
-      console.log(
-        `<div class="car-box" contenteditable style="top: ${el.style.top}; left: ${el.style.left}; transform: ${el.style.transform};">${el.innerText}</div>`
-      );
-    }
-  });
-}
