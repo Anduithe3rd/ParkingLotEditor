@@ -8,23 +8,23 @@ function setView(view) {
   container.style.backgroundImage = `url('${map[view]}')`;
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+  const boxes = document.querySelectorAll('.car-box');
+  boxes.forEach(box => {
+    makeDraggable(box);
+  });
+});
+
+function makeDraggable(el) {
+  let isDragging = false;
+  let offsetX = 0, offsetY = 0;
+
   el.addEventListener('pointerdown', (e) => {
     isDragging = true;
     offsetX = e.offsetX;
     offsetY = e.offsetY;
     el.setPointerCapture(e.pointerId);
     el.style.zIndex = 1000;
-  });
-
-  el.addEventListener('pointerup', (e) => {
-    if (isDragging) {
-      isDragging = false;
-      el.releasePointerCapture(e.pointerId);
-      el.style.zIndex = '';
-      console.log(
-        `<div class="car-box" contenteditable style="top: ${el.style.top}; left: ${el.style.left}; transform: ${el.style.transform};">${el.innerText}</div>`
-      );
-    }
   });
 
   el.addEventListener('pointermove', (e) => {
@@ -37,3 +37,15 @@ function setView(view) {
       el.style.top = `${newTop}px`;
     }
   });
+
+  el.addEventListener('pointerup', (e) => {
+    if (isDragging) {
+      isDragging = false;
+      el.releasePointerCapture(e.pointerId);
+      el.style.zIndex = '';
+      console.log(
+        `<div class="car-box" contenteditable style="top: ${el.style.top}; left: ${el.style.left}; transform: ${el.style.transform};">${el.innerText}</div>`
+      );
+    }
+  });
+}
