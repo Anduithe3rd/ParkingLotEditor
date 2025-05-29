@@ -22,10 +22,25 @@ body {
   position: absolute;
   width: 60px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid black;
+  background: transparent;
+  border: none;
   text-align: center;
   line-height: 20px;
   font-size: 12px;
   transform-origin: center center;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  user-select: none;
+  cursor: pointer;
+  color: black;
+  padding: 0;
+  margin: 0;
 }
+
+/* Optional: show a faint border when hovered or editing */
+.car-box:focus, .car-box:hover {
+  outline: 1px dashed #888;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+
