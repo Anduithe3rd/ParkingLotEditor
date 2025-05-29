@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const boxes = document.querySelectorAll('.car-box');
   boxes.forEach(box => {
     makeDraggable(box);
+    makeRotatable(box);
   });
 });
 
@@ -20,6 +21,7 @@ function makeDraggable(el) {
   let offsetX = 0, offsetY = 0;
 
   el.addEventListener('pointerdown', (e) => {
+    if (e.target.classList.contains('rotate-handle')) return; // don't drag if rotating
     isDragging = true;
     offsetX = e.offsetX;
     offsetY = e.offsetY;
@@ -43,9 +45,55 @@ function makeDraggable(el) {
       isDragging = false;
       el.releasePointerCapture(e.pointerId);
       el.style.zIndex = '';
-      console.log(
-        `<div class="car-box" contenteditable style="top: ${el.style.top}; left: ${el.style.left}; transform: ${el.style.transform};">${el.innerText}</div>`
-      );
+      logBox(el);
     }
   });
+}
+
+function makeRotatable(el) {
+  const handle = el.querySelector('.rotate-handle');
+  if (!handle) return;
+
+  let isRotating = false;
+  let centerX, centerY, startAngle;
+
+  handle.addEventListener('pointerdown', (e) => {
+    isRotating = true;
+    const rect = el.getBoundingClientRect();
+    centerX = rect.left + rect.width / 2;
+    centerY = rect.top + rect.height / 2;
+    startAngle = getRotationAngle(el);
+    e.preventDefault();
+    e.stopPropagation();
+    handle.setPointerCapture(e.pointerId);
+  });
+
+  handle.addEventListener('pointermove', (e) => {
+    if (isRotating) {
+      const dx = e.clientX - centerX;
+      const dy = e.clientY - centerY;
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+      el.style.transform = `rotate(${angle}deg)`;
+    }
+  });
+
+  handle.addEventListener('pointerup', (e) => {
+    if (isRotating) {
+      isRotating = false;
+      handle.releasePointerCapture(e.pointerId);
+      logBox(el);
+    }
+  });
+}
+
+function getRotationAngle(el) {
+  const transform = el.style.transform;
+  const match = transform.match(/rotate\((-?\d+\.?\d*)deg\)/);
+  return match ? parseFloat(match[1]) : 0;
+}
+
+function logBox(el) {
+  console.log(
+    `<div class="car-box" style="top: ${el.style.top}; left: ${el.style.left}; transform: ${el.style.transform};">${el.innerText}<div class="rotate-handle"></div></div>`
+  );
 }
