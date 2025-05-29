@@ -97,3 +97,15 @@ function logBox(el) {
     `<div class="car-box" style="top: ${el.style.top}; left: ${el.style.left}; transform: ${el.style.transform};">${el.innerText}<div class="rotate-handle"></div></div>`
   );
 }
+
+function downloadCanvas() {
+  const container = document.getElementById('lot-container');
+  html2canvas(container, {
+    backgroundColor: null
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'parking-lot.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}

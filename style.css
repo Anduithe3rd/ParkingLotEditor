@@ -22,7 +22,7 @@ body {
   position: absolute;
   width: 120px;
   height: 30px;
-  background: transparent;
+  background: rgba(206, 223, 113, 0.664);
   border: none;
   text-align: center;
   line-height: 20px;
@@ -32,7 +32,7 @@ body {
   font-weight: 500;
   user-select: none;
   cursor: move;
-  color: rgb(50, 62, 163);
+  color: rgb(0, 0, 0);
   padding: 0;
   margin: 0;
 }
@@ -40,7 +40,7 @@ body {
 .car-box:focus,
 .car-box:hover {
   outline: 1px dashed #888;
-  background-color: rgb(92, 99, 160);
+  background-color: rgb(207, 223, 113);
 }
 
 .rotate-handle {
