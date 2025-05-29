@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parking Lot Editor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="controls">
+    <button onclick="setView('outline')">Outline View</button>
+    <button onclick="setView('grid')">Grid View</button>
+    <button onclick="setView('topo')">Topographic View</button>
+    <button onclick="window.print()">Print View</button>
+  </div>
+
+  <div id="lot-container">
+    <!-- Textboxes: Adjust positions and rotation per parking slot -->
+    <div class="car-box" contenteditable style="top: 80px; left: 160px; transform: rotate(-22deg);">SUV</div>
+    <div class="car-box" contenteditable style="top: 120px; left: 190px; transform: rotate(-22deg);">Truck</div>
+    <div class="car-box" contenteditable style="top: 160px; left: 220px; transform: rotate(-22deg);">Empty</div>
+    <!-- Add more boxes here -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

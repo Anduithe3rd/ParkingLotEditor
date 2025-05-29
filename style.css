@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.controls {
+  margin-bottom: 10px;
+}
+
+#lot-container {
+  position: relative;
+  width: 1090px;
+  height: 768px;
+  background-image: url('ParkingLotOutline.png');
+  background-size: cover;
+  border: 2px solid #000;
+}
+
+.car-box {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  transform-origin: center center;
+}
