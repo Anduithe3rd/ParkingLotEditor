@@ -21,7 +21,7 @@ function makeDraggable(el) {
   let offsetX = 0, offsetY = 0;
 
   el.addEventListener('pointerdown', (e) => {
-    if (e.target.classList.contains('rotate-handle')) return; // don't drag if rotating
+    if (e.target.classList.contains('rotate-handle')) return; // dont drag if rotating
     isDragging = true;
     offsetX = e.offsetX;
     offsetY = e.offsetY;
