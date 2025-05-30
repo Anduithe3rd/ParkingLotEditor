@@ -17,6 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function makeDraggable(el) {
+  if (movementLocked) return;
   let isDragging = false;
   let offsetX = 0, offsetY = 0;
 
@@ -55,36 +56,35 @@ function makeRotatable(el) {
   if (!handle) return;
 
   let isRotating = false;
-  let centerX, centerY, startAngle;
+  let centerX, centerY;
 
   handle.addEventListener('pointerdown', (e) => {
+    if (movementLocked) return;
     isRotating = true;
     const rect = el.getBoundingClientRect();
     centerX = rect.left + rect.width / 2;
     centerY = rect.top + rect.height / 2;
-    startAngle = getRotationAngle(el);
     e.preventDefault();
     e.stopPropagation();
     handle.setPointerCapture(e.pointerId);
   });
 
   handle.addEventListener('pointermove', (e) => {
-    if (isRotating) {
-      const dx = e.clientX - centerX;
-      const dy = e.clientY - centerY;
-      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-      el.style.transform = `rotate(${angle}deg)`;
-    }
+    if (!isRotating) return;
+    const dx = e.clientX - centerX;
+    const dy = e.clientY - centerY;
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    el.style.transform = `rotate(${angle}deg)`;
   });
 
   handle.addEventListener('pointerup', (e) => {
-    if (isRotating) {
-      isRotating = false;
-      handle.releasePointerCapture(e.pointerId);
-      logBox(el);
-    }
+    if (!isRotating) return;
+    isRotating = false;
+    handle.releasePointerCapture(e.pointerId);
+    logBox(el);
   });
 }
+
 
 function getRotationAngle(el) {
   const transform = el.style.transform;
@@ -108,4 +108,13 @@ function downloadCanvas() {
     link.href = canvas.toDataURL('image/png');
     link.click();
   });
+}
+
+let movementLocked = true;
+
+function toggleLock() {
+  movementLocked = !movementLocked;
+  const text = movementLocked ? "Move Textboxes: OFF" : "Move Textboxes: ON";
+  document.getElementById("toggle-lock").innerText = text;
+  document.getElementById("lot-container").classList.toggle("locked", movementLocked);
 }

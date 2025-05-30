@@ -12,20 +12,21 @@
     <button onclick="setView('grid')">Grid View</button>
     <button onclick="setView('topo')">Topographic View</button>
     <button onclick="downloadCanvas()">Download Lot Image</button>
+    <button id="toggle-lock" onclick="toggleLock()">Move Textboxes: OFF</button>
   </div>
 
-  <div id="lot-container">
-    <!-- Editable and rotatable boxes -->
-    <div class="car-box" contenteditable="true" style="top: 215.078px; left: 163.858px; transform: rotate(53.4521deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 490.139px; left: 362.737px; transform: rotate(52.7756deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 191.303px; left: 250.566px; transform: rotate(53.1301deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 162.753px; left: 289.9px; transform: rotate(53.4227deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 122.958px; left: 415.332px; transform: rotate(53.5131deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 355.452px; left: 607.464px; transform: rotate(52.6908deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 390.84px; left: 572.453px; transform: rotate(53.0487deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 635.126px; left: 647.196px; transform: rotate(-0.256738deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 411.561px; left: 473.485px; transform: rotate(52.7756deg);">—<div class="rotate-handle"></div></div>
-    <div class="car-box" contenteditable="true" style="top: 438.804px; left: 434.296px; transform: rotate(54.1266deg);">—<div class="rotate-handle"></div></div>
+  <div id="lot-container" class="locked">
+    <!-- Editable and rotatable boxes with placeholder -->
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 215.078px; left: 163.858px; transform: rotate(53.4521deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 490.139px; left: 362.737px; transform: rotate(52.7756deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 191.303px; left: 250.566px; transform: rotate(53.1301deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 162.753px; left: 289.9px; transform: rotate(53.4227deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 122.958px; left: 415.332px; transform: rotate(53.5131deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 355.452px; left: 607.464px; transform: rotate(52.6908deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 390.84px; left: 572.453px; transform: rotate(53.0487deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 635.126px; left: 647.196px; transform: rotate(-0.256738deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 411.561px; left: 473.485px; transform: rotate(52.7756deg);"><div class="rotate-handle"></div></div>
+    <div class="car-box" contenteditable="true" data-placeholder="---" style="top: 438.804px; left: 434.296px; transform: rotate(54.1266deg);"><div class="rotate-handle"></div></div>
   </div>
 
   <script src="script.js"></script>
